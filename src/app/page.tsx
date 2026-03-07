@@ -226,15 +226,15 @@ export default function Home() {
                         <span className="block text-4xl font-extrabold text-mait mb-2">~15%</span>
                         <p className="text-xs font-bold uppercase tracking-widest text-slate-500 leading-tight">Tabt omsætning grundet optaget telefon</p>
                     </div>
-                    <div className="saas-card bg-white/5 border-white/10 p-8 text-center animate-float" style="animation-delay: 1s">
+                    <div className="saas-card bg-white/5 border-white/10 p-8 text-center animate-float" style={{animationDelay: "1s"}}>
                         <span className="block text-4xl font-extrabold text-mait mb-2">12t</span>
                         <p className="text-xs font-bold uppercase tracking-widest text-slate-500 leading-tight">Spildt tid på simple spørgsmål pr. uge</p>
                     </div>
-                    <div className="saas-card bg-white/5 border-white/10 p-8 text-center animate-float" style="animation-delay: 0.5s">
+                    <div className="saas-card bg-white/5 border-white/10 p-8 text-center animate-float" style={{animationDelay: "0.5s"}}>
                         <span className="block text-4xl font-extrabold text-mait mb-2">100%</span>
                         <p className="text-xs font-bold uppercase tracking-widest text-slate-500 leading-tight">Svar-rate på alle indgående opkald</p>
                     </div>
-                    <div className="saas-card bg-white/5 border-white/10 p-8 text-center animate-float" style="animation-delay: 1.5s">
+                    <div className="saas-card bg-white/5 border-white/10 p-8 text-center animate-float" style={{animationDelay: "1.5s"}}>
                         <span className="block text-4xl font-extrabold text-mait mb-2">+18%</span>
                         <p className="text-xs font-bold uppercase tracking-widest text-slate-500 leading-tight">Gns. stigning i ordreværdi</p>
                     </div>
