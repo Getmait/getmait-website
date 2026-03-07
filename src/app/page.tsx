@@ -621,8 +621,8 @@ export default function Home() {
                     <div className="space-y-4">
                         <h4 className="text-xs font-bold text-slate-900 uppercase tracking-[0.2em]">Lovpligtig</h4>
                         <ul className="text-sm text-slate-500 space-y-2 italic font-medium">
-                            <li><a href="handelsbetingelser.html" className="hover:text-mait transition">Handelsbetingelser</a></li>
-                            <li><a href="privatlivspolitik.html" className="hover:text-mait transition">Privatlivspolitik</a></li>
+                            <li><a href="/handelsbetingelser" className="hover:text-mait transition">Handelsbetingelser</a></li>
+                            <li><a href="/privatlivspolitik" className="hover:text-mait transition">Privatlivspolitik</a></li>
                             <li><a href="#" className="hover:text-mait transition">Cookie-indstillinger</a></li>
                         </ul>
                     </div>
