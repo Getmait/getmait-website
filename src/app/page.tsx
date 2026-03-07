@@ -423,11 +423,11 @@ export default function Home() {
     
                 {/* Progress */}
                 <div className="flex items-center mb-10">
-                    <div id="pd1" className={pd(1)} className="w-9 h-9 rounded-full bg-mait text-white text-xs font-black flex items-center justify-center shadow-lg shadow-orange-200/60 transition-all duration-300 shrink-0">1</div>
+                    <div id="pd1" className={pd(1)}>1</div>
                     <div id="pl1" style={{background: step >= 2 ? "rgb(34 197 94)" : "#e2e8f0"}} className="flex-1 h-0.5 bg-slate-200 mx-2 transition-all duration-500"></div>
-                    <div id="pd2" className={pd(2)} className="w-9 h-9 rounded-full bg-slate-200 text-slate-400 text-xs font-black flex items-center justify-center transition-all duration-300 shrink-0">2</div>
+                    <div id="pd2" className={pd(2)}>2</div>
                     <div id="pl2" style={{background: step >= 3 ? "rgb(34 197 94)" : "#e2e8f0"}} className="flex-1 h-0.5 bg-slate-200 mx-2 transition-all duration-500"></div>
-                    <div id="pd3" className={pd(3)} className="w-9 h-9 rounded-full bg-slate-200 text-slate-400 text-xs font-black flex items-center justify-center transition-all duration-300 shrink-0">3</div>
+                    <div id="pd3" className={pd(3)}>3</div>
                 </div>
     
                 <div className="saas-card bg-white p-10 md:p-14 relative overflow-hidden min-h-[400px]">
