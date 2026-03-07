@@ -117,8 +117,8 @@ export default function Home() {
 
   useEffect(() => {
     document.querySelectorAll('a[href^="#"]').forEach(link => {
-      link.addEventListener('click', function (e) {
-        const href = (this as HTMLAnchorElement).getAttribute('href');
+      link.addEventListener('click', (e) => {
+        const href = (link as HTMLAnchorElement).getAttribute('href');
         if (!href || href === '#') return;
         const target = document.querySelector(href);
         if (!target) return;
