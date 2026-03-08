@@ -123,12 +123,12 @@ export default function Home() {
                     <a href="#problem" className="hover:text-mait transition">Hvorfor nu?</a>
                     <a href="#voice" className="hover:text-mait transition">Voice AI</a>
                     <a href="#roi" className="hover:text-mait transition">ROI Beregner</a>
-                    <a href="#demo" className="hover:text-mait transition">Prov Mait</a>
+                    <a href="#demo" className="hover:text-mait transition">Prøv Mait</a>
                 </div>
     
                 <div className="flex items-center gap-4">
                     <a href="#demo" className="btn-primary px-7 py-3 rounded-full text-sm font-bold">
-                        Prov Mait gratis
+                        Prøv Mait gratis
                     </a>
                 </div>
             </div>
@@ -389,8 +389,8 @@ export default function Home() {
             <div className="max-w-2xl mx-auto">
     
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Prov din Mait inden du beslutter</h2>
-                    <p className="text-slate-500 text-lg italic">Svar pa 2 hurtige sporgsmaal og ring til nummeret. Din Mait gor bestillingsopkaldet for dig.</p>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Prøv din Mait inden du beslutter</h2>
+                    <p className="text-slate-500 text-lg italic">Svar på 2 hurtige spørgsmål og ring til nummeret. Din Mait gør bestillingsopkaldet for dig.</p>
                 </div>
     
                 {/* Progress */}
@@ -407,9 +407,19 @@ export default function Home() {
     
                     {/* TRIN 1: Navn + Telefon */}
                     <div id="step1" style={{display: step===1 ? "block" : "none"}}>
-                        <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-3">Trin 1 af 3</p>
-                        <h3 className="text-3xl font-extrabold mb-2 tracking-tight">Hvem er du?</h3>
-                        <p className="text-slate-400 mb-8">Vi konfigurerer din Mait med dine oplysninger.</p>
+                        <div className="flex items-center gap-5 mb-8">
+                            <div className="relative shrink-0">
+                                <div className="w-16 h-16 rounded-full bg-mait/10 border-2 border-mait/20 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mait"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </div>
+                                <span className="absolute inset-0 rounded-full border-2 border-mait/30 animate-ping"></span>
+                            </div>
+                            <div>
+                                <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-1">Trin 1 af 3</p>
+                                <h3 className="text-3xl font-extrabold tracking-tight">Hvem er du?</h3>
+                                <p className="text-slate-400 mt-1">Vi konfigurerer din Mait med dine oplysninger.</p>
+                            </div>
+                        </div>
                         <div className="space-y-4">
                             <div>
                                 <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Dit navn</label>
@@ -421,7 +431,7 @@ export default function Home() {
                             </div>
                             <p id="s1-error" style={{display: s1Error ? "block" : "none"}} className="hidden text-red-500 text-sm font-semibold">Udfyld venligst begge felter.</p>
                             <button onClick={submitStep1} id="s1-btn" className="w-full btn-primary py-5 rounded-xl font-bold text-lg mt-2">
-                                Naeste trin →
+                                Næste trin →
                             </button>
                             <p className="text-center text-xs text-slate-400 italic">Ingen binding. Ingen spam.</p>
                         </div>
@@ -431,7 +441,7 @@ export default function Home() {
                     <div id="step2" style={{display: step===2 ? "block" : "none"}} className="hidden">
                         <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-3">Trin 2 af 3</p>
                         <h3 className="text-3xl font-extrabold mb-2 tracking-tight">Fortael os om dit pizzaria</h3>
-                        <p className="text-slate-400 mb-8">Saadan konfigurerer vi din Mait til din forretning.</p>
+                        <p className="text-slate-400 mb-8">Sådan konfigurerer vi din Mait til din forretning.</p>
                         <div className="space-y-8">
     
                             <div>
@@ -484,7 +494,7 @@ export default function Home() {
                                 </div>
                             </div>
     
-                            <p id="s2-error" style={{display: s2Error ? "block" : "none"}} className="hidden text-red-500 text-sm font-semibold">Udfyld venligst alle felter og vaelg en mulighed for hvert sporgsmaal.</p>
+                            <p id="s2-error" style={{display: s2Error ? "block" : "none"}} className="hidden text-red-500 text-sm font-semibold">Udfyld venligst alle felter og vælg en mulighed for hvert spørgsmål.</p>
                             <button onClick={submitStep2} id="s2-btn" className="w-full btn-primary py-5 rounded-xl font-bold text-lg">
                                 Vis mig mit nummer →
                             </button>
@@ -509,7 +519,7 @@ export default function Home() {
                                 <div>
                                     <p className="text-[11px] font-bold text-mait uppercase tracking-widest mb-2">Din Mait er klar</p>
                                     <h3 className="text-3xl font-extrabold tracking-tight mb-3">Ring og bestil en pizza</h3>
-                                    <p className="text-slate-400 text-lg">Oplev hvordan dine kunder vil blive modt hos {pizzaria || 'dit pizzaria'}</p>
+                                    <p className="text-slate-400 text-lg">Oplev hvordan dine kunder vil blive mødt hos {pizzaria || 'dit pizzaria'}</p>
                                 </div>
                                 <a href="tel:+4552515523" className="btn-primary inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-bold text-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
