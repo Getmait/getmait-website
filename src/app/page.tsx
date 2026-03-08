@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 
-type Selections = { opkald: string | null; ordre: string | null; frust: string | null };
+type Selections = { opkald: string | null; ordre: string | null };
 
 export default function Home() {
   const callsSliderRef = useRef<HTMLInputElement>(null);
@@ -15,7 +15,7 @@ export default function Home() {
 
   const [step, setStep] = useState(1);
   const [leadId, setLeadId] = useState<string | null>(null);
-  const [selections, setSelections] = useState<Selections>({ opkald: null, ordre: null, frust: null });
+  const [selections, setSelections] = useState<Selections>({ opkald: null, ordre: null });
   const [navn, setNavn] = useState('');
   const [telefon, setTelefon] = useState('');
   const [pizzaria, setPizzaria] = useState('');
@@ -23,20 +23,6 @@ export default function Home() {
   const [s1Error, setS1Error] = useState(false);
   const [s2Error, setS2Error] = useState(false);
   const [s3Loading, setS3Loading] = useState(true);
-  const [s3Result, setS3Result] = useState<{ tab_kr?: number; aarlig_kr?: number; score?: number; message?: string } | null>(null);
-  const [s3Error, setS3Error] = useState(false);
-  const [aiMsg, setAiMsg] = useState('');
-  const [s1BtnText, setS1BtnText] = useState('Fortsæt til din analyse →');
-  const [s2BtnText, setS2BtnText] = useState('Vis mig min personlige analyse →');
-
-  const [vStep, setVStep] = useState(1);
-  const [vNavn, setVNavn] = useState('');
-  const [vTelefon, setVTelefon] = useState('');
-  const [vPizzaria, setVPizzaria] = useState('');
-  const [vLoading, setVLoading] = useState(false);
-  const [vDone, setVDone] = useState(false);
-  const [v1Error, setV1Error] = useState(false);
-  const [v2Error, setV2Error] = useState(false);
 
   function calcROI(calls: number, order: number) {
     const annualRevenue = Math.round(calls * (order * 1.15) * 52);
@@ -71,7 +57,6 @@ export default function Home() {
   async function submitStep1() {
     if (!navn || !telefon) { setS1Error(true); return; }
     setS1Error(false);
-    setS1BtnText('Gemmer...');
     try {
       const res = await fetch('https://n8n.getmait.dk/webhook/getmait-lead-init', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -81,68 +66,25 @@ export default function Home() {
       setLeadId(data.lead_id);
     } catch { /* fortsæt alligevel */ }
     setStep(2);
-    setS1BtnText('Fortsæt til din analyse →');
-  }
-
-  function vSubmit1() {
-    if (!vNavn || !vTelefon) { setV1Error(true); return; }
-    setV1Error(false);
-    setVStep(2);
-  }
-
-  async function vSubmit2() {
-    if (!vPizzaria) { setV2Error(true); return; }
-    setV2Error(false);
-    setVLoading(true);
-    try {
-      await fetch('https://n8n.getmait.dk/webhook/getmait-voice-demo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ navn: vNavn, telefon: vTelefon, pizzaria: vPizzaria }),
-      });
-    } catch { /* forsaet alligevel */ }
-    setVLoading(false);
-    setVDone(true);
-  }
-
-  function typeWriter(text: string, speed = 18) {
-    let i = 0;
-    setAiMsg('');
-    const iv = setInterval(() => {
-      i++;
-      setAiMsg(text.slice(0, i));
-      if (i >= text.length) clearInterval(iv);
-    }, speed);
   }
 
   async function submitStep2() {
-    if (!pizzaria || !email || !selections.opkald || !selections.ordre || !selections.frust) {
+    if (!pizzaria || !email || !selections.opkald || !selections.ordre) {
       setS2Error(true); return;
     }
     setS2Error(false);
-    setS2BtnText('Analyserer...');
     setStep(3);
     setS3Loading(true);
-    setS3Error(false);
-    try {
-      const res = await fetch('https://n8n.getmait.dk/webhook/getmait-lead-complete', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          lead_id: leadId, pizzaria, email, navn,
-          opkald_niveau: selections.opkald,
-          ordre_niveau: selections.ordre,
-          frustration: selections.frust,
-        }),
-      });
-      const data = await res.json();
-      setS3Result(data);
-      setS3Loading(false);
-      typeWriter(data.message || 'Vi har modtaget dine oplysninger og kontakter dig hurtigst muligt!');
-    } catch {
-      setS3Loading(false);
-      setS3Error(true);
-    }
-    setS2BtnText('Vis mig min personlige analyse →');
+    fetch('https://n8n.getmait.dk/webhook/getmait-lead-complete', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lead_id: leadId, pizzaria, email, navn,
+        opkald_niveau: selections.opkald,
+        ordre_niveau: selections.ordre,
+        telefon,
+      }),
+    }).catch(() => {});
+    setTimeout(() => setS3Loading(false), 1500);
   }
 
   useEffect(() => {
@@ -181,12 +123,12 @@ export default function Home() {
                     <a href="#problem" className="hover:text-mait transition">Hvorfor nu?</a>
                     <a href="#voice" className="hover:text-mait transition">Voice AI</a>
                     <a href="#roi" className="hover:text-mait transition">ROI Beregner</a>
-                    <a href="#ring-mig" className="hover:text-mait transition">Hor Mait</a>
+                    <a href="#demo" className="hover:text-mait transition">Prov Mait</a>
                 </div>
     
                 <div className="flex items-center gap-4">
                     <a href="#demo" className="btn-primary px-7 py-3 rounded-full text-sm font-bold">
-                        Få en gratis analyse
+                        Prov Mait gratis
                     </a>
                 </div>
             </div>
@@ -442,98 +384,13 @@ export default function Home() {
             </div>
         </section>
     
-        {/* Voice Demo Lead Magnet */}
-        <section id="ring-mig" className="py-32 px-6 bg-slate-900 text-white rounded-[64px] mx-6 overflow-hidden relative">
-            <div className="absolute top-0 left-0 w-1/2 h-full bg-mait/10 blur-[120px] rounded-full pointer-events-none"></div>
-            <div className="max-w-2xl mx-auto relative z-10">
-
-                <div className="text-center mb-12">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-mait/20 border border-mait/30 mb-8 relative">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mait animate-pulse"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        <span className="absolute inset-0 rounded-full border-2 border-mait/40 animate-ping"></span>
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-                        Hor din egen <span className="text-mait">Mait</span> ringe dig op
-                    </h2>
-                    <p className="text-slate-400 text-lg">Indtast dit nummer og dit pizzarianavn. Mait ringer dig op inden for 2 minutter og demonstrerer, hvad hun kan gore for din forretning.</p>
-                </div>
-
-                {!vDone ? (
-                    <div className="bg-white/5 border border-white/10 rounded-3xl p-10 md:p-14">
-
-                        <div className="flex items-center gap-3 mb-10">
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${vStep >= 1 ? 'bg-mait text-white shadow-lg shadow-orange-500/30' : 'bg-white/10 text-slate-500'}`}>1</div>
-                            <div className={`flex-1 h-0.5 transition-all duration-500 ${vStep >= 2 ? 'bg-green-500' : 'bg-white/10'}`}></div>
-                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${vStep >= 2 ? 'bg-mait text-white shadow-lg shadow-orange-500/30' : 'bg-white/10 text-slate-500'}`}>2</div>
-                        </div>
-
-                        {vStep === 1 && (
-                            <div className="space-y-5">
-                                <div>
-                                    <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-4">Trin 1 af 2</p>
-                                    <h3 className="text-2xl font-extrabold mb-1 tracking-tight">Hvem skal Mait ringe til?</h3>
-                                    <p className="text-slate-400 text-sm mb-6">Vi ringer dig op med det samme.</p>
-                                </div>
-                                <div>
-                                    <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Dit navn</label>
-                                    <input value={vNavn} onChange={e => setVNavn(e.target.value)} type="text" placeholder="Fornavn Efternavn" className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-sm font-semibold text-white placeholder-slate-600 focus:outline-none focus:border-mait transition" />
-                                </div>
-                                <div>
-                                    <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Telefonnummer</label>
-                                    <input value={vTelefon} onChange={e => setVTelefon(e.target.value)} type="tel" placeholder="+45 12 34 56 78" className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-sm font-semibold text-white placeholder-slate-600 focus:outline-none focus:border-mait transition" />
-                                </div>
-                                {v1Error && <p className="text-red-400 text-sm font-semibold">Udfyld venligst begge felter.</p>}
-                                <button onClick={vSubmit1} className="w-full btn-primary py-5 rounded-xl font-bold text-lg mt-2">
-                                    Naeste trin →
-                                </button>
-                            </div>
-                        )}
-
-                        {vStep === 2 && (
-                            <div className="space-y-5">
-                                <div>
-                                    <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-4">Trin 2 af 2</p>
-                                    <h3 className="text-2xl font-extrabold mb-1 tracking-tight">Hvad hedder dit pizzaria?</h3>
-                                    <p className="text-slate-400 text-sm mb-6">Mait presenter sig med dit pizzarianavn naer hun ringer.</p>
-                                </div>
-                                <div>
-                                    <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Pizzarianavn</label>
-                                    <input value={vPizzaria} onChange={e => setVPizzaria(e.target.value)} type="text" placeholder="Ex. Napoli Pizza" className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-sm font-semibold text-white placeholder-slate-600 focus:outline-none focus:border-mait transition" autoFocus />
-                                </div>
-                                {v2Error && <p className="text-red-400 text-sm font-semibold">Skriv venligst dit pizzarianavn.</p>}
-                                <button onClick={vSubmit2} disabled={vLoading} className="w-full btn-primary py-5 rounded-xl font-bold text-lg mt-2 disabled:opacity-60">
-                                    {vLoading ? 'Ringer op...' : 'Ring mig op nu →'}
-                                </button>
-                                <p className="text-center text-xs text-slate-600 italic">Ingen binding. Ingen spam. Kun en rigtig demonstration.</p>
-                            </div>
-                        )}
-                    </div>
-                ) : (
-                    <div className="bg-white/5 border border-white/10 rounded-3xl p-10 md:p-14 text-center space-y-6">
-                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 border border-green-500/30 mx-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-green-400"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                        <h3 className="text-3xl font-extrabold tracking-tight">Mait ringer dig op!</h3>
-                        <p className="text-slate-400 text-lg">Hold din telefon klar, {vNavn}. Mait fra {vPizzaria} ringer dig op inden for 2 minutter.</p>
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-400 text-sm font-semibold">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
-                            </span>
-                            Opkald er sat i ko
-                        </div>
-                    </div>
-                )}
-            </div>
-        </section>
-
         {/* AI Sales Funnel */}
         <section id="demo" className="py-32 px-6">
             <div className="max-w-2xl mx-auto">
     
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Se hvad Getmait kan gøre for dig</h2>
-                    <p className="text-slate-500 text-lg italic">Svar på 3 hurtige spørgsmål — så får du en personlig analyse på under 30 sekunder.</p>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Prov din Mait inden du beslutter</h2>
+                    <p className="text-slate-500 text-lg italic">Svar pa 2 hurtige sporgsmaal og ring til nummeret. Din Mait gor bestillingsopkaldet for dig.</p>
                 </div>
     
                 {/* Progress */}
@@ -550,9 +407,9 @@ export default function Home() {
     
                     {/* TRIN 1: Navn + Telefon */}
                     <div id="step1" style={{display: step===1 ? "block" : "none"}}>
-                        <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-3">Trin 1 af 2</p>
+                        <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-3">Trin 1 af 3</p>
                         <h3 className="text-3xl font-extrabold mb-2 tracking-tight">Hvem er du?</h3>
-                        <p className="text-slate-400 mb-8">Vi gemmer dine oplysninger nu, så du ikke mister din analyse.</p>
+                        <p className="text-slate-400 mb-8">Vi konfigurerer din Mait med dine oplysninger.</p>
                         <div className="space-y-4">
                             <div>
                                 <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Dit navn</label>
@@ -564,7 +421,7 @@ export default function Home() {
                             </div>
                             <p id="s1-error" style={{display: s1Error ? "block" : "none"}} className="hidden text-red-500 text-sm font-semibold">Udfyld venligst begge felter.</p>
                             <button onClick={submitStep1} id="s1-btn" className="w-full btn-primary py-5 rounded-xl font-bold text-lg mt-2">
-                                Fortsæt til din analyse →
+                                Naeste trin →
                             </button>
                             <p className="text-center text-xs text-slate-400 italic">Ingen binding. Ingen spam.</p>
                         </div>
@@ -572,9 +429,9 @@ export default function Home() {
     
                     {/* TRIN 2: Kvalificering */}
                     <div id="step2" style={{display: step===2 ? "block" : "none"}} className="hidden">
-                        <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-3">Trin 2 af 2</p>
-                        <h3 className="text-3xl font-extrabold mb-2 tracking-tight">Fortæl os om dit pizzaria</h3>
-                        <p className="text-slate-400 mb-8">Tre hurtige spørgsmål — vi beregner din gevinst præcist.</p>
+                        <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-3">Trin 2 af 3</p>
+                        <h3 className="text-3xl font-extrabold mb-2 tracking-tight">Fortael os om dit pizzaria</h3>
+                        <p className="text-slate-400 mb-8">Saadan konfigurerer vi din Mait til din forretning.</p>
                         <div className="space-y-8">
     
                             <div>
@@ -627,71 +484,40 @@ export default function Home() {
                                 </div>
                             </div>
     
-                            <div>
-                                <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-3">Hvad frustrerer dig mest i dag?</label>
-                                <div className="space-y-3" id="frust-cards">
-                                    <button onClick={(e) => selectCard('frust', 'taber-ordrer', e.currentTarget)} className="choice-card w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-mait/50 transition-all">
-                                        <span className="font-bold text-slate-900">Vi mister ordrer fordi telefonen er optaget eller ingen svarer</span>
-                                    </button>
-                                    <button onClick={(e) => selectCard('frust', 'lav-ordrevaerdi', e.currentTarget)} className="choice-card w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-mait/50 transition-all">
-                                        <span className="font-bold text-slate-900">Gennemsnitsordren er for lav — vi mersælger ikke nok</span>
-                                    </button>
-                                    <button onClick={(e) => selectCard('frust', 'personaletid', e.currentTarget)} className="choice-card w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-mait/50 transition-all">
-                                        <span className="font-bold text-slate-900">Personalet bruger for meget tid på telefon i stedet for at lave mad</span>
-                                    </button>
-                                    <button onClick={(e) => selectCard('frust', 'alle-tre', e.currentTarget)} className="choice-card w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:border-mait/50 transition-all">
-                                        <span className="font-bold text-slate-900">Alle tre — det hele hænger sammen</span>
-                                    </button>
-                                </div>
-                            </div>
-    
-                            <p id="s2-error" style={{display: s2Error ? "block" : "none"}} className="hidden text-red-500 text-sm font-semibold">Udfyld venligst alle felter og vælg en mulighed for hvert spørgsmål.</p>
+                            <p id="s2-error" style={{display: s2Error ? "block" : "none"}} className="hidden text-red-500 text-sm font-semibold">Udfyld venligst alle felter og vaelg en mulighed for hvert sporgsmaal.</p>
                             <button onClick={submitStep2} id="s2-btn" className="w-full btn-primary py-5 rounded-xl font-bold text-lg">
-                                Vis mig min personlige analyse →
+                                Vis mig mit nummer →
                             </button>
                         </div>
                     </div>
     
-                    {/* TRIN 3: Resultat */}
+                    {/* TRIN 3: Ring nu */}
                     <div id="step3" style={{display: step===3 ? "block" : "none"}} className="hidden">
-                        {/* Loading */}
-                        <div id="s3-loading" style={{display: s3Loading ? "block" : "none"}} className="text-center py-12">
-                            <div className="flex justify-center mb-6">
-                                <div className="w-14 h-14 rounded-full border-4 border-orange-100 border-t-mait animate-spin"></div>
-                            </div>
-                            <p id="loading-text" className="text-slate-500 font-semibold">Analyserer dit pizzaria...</p>
-                        </div>
-                        {/* Resultat */}
-                        <div id="s3-result" style={{display: (!s3Loading && !s3Error) ? "block" : "none"}} className="hidden">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-100 text-green-700 text-[11px] font-bold uppercase tracking-widest mb-8">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
-                                Din personlige analyse er klar
-                            </div>
-    
-                            <div className="bg-slate-950 rounded-2xl p-8 mb-8 relative overflow-hidden">
-                                <div className="absolute -top-8 -right-8 w-40 h-40 bg-mait/20 rounded-full blur-[50px]"></div>
-                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.25em] mb-4">Getmait AI — personlig analyse</p>
-                                <p id="ai-msg" className="text-white text-lg leading-relaxed font-medium relative z-10"></p>
-                            </div>
-    
-                            <div className="grid grid-cols-3 gap-4 mb-8">
-                                <div className="bg-orange-50 rounded-2xl p-5 border border-orange-100 text-center">
-                                    <span className="text-[10px] font-bold text-orange-400 uppercase block mb-1">Tab pr. uge</span>
-                                    <span id="r-tab" className="text-xl font-extrabold text-slate-900"></span>
+                        {s3Loading ? (
+                            <div className="text-center py-12">
+                                <div className="flex justify-center mb-6">
+                                    <div className="w-14 h-14 rounded-full border-4 border-orange-100 border-t-mait animate-spin"></div>
                                 </div>
-                                <div className="bg-slate-900 rounded-2xl p-5 text-center">
-                                    <span className="text-[10px] font-bold text-slate-500 uppercase block mb-1">Årlig gevinst</span>
-                                    <span id="r-aarlig" className="text-xl font-extrabold text-white"></span>
-                                </div>
-                                <div className="bg-orange-50 rounded-2xl p-5 border border-orange-100 text-center">
-                                    <span className="text-[10px] font-bold text-orange-400 uppercase block mb-1">Lead score</span>
-                                    <span id="r-score" className="text-xl font-extrabold text-slate-900"></span>
-                                </div>
+                                <p className="text-slate-500 font-semibold">Konfigurerer din Mait...</p>
                             </div>
-    
-                            <p className="text-slate-400 text-sm italic text-center">Vi kontakter dig inden for 24 timer på det oplyste telefonnummer.</p>
-                        </div>
-                        <p id="s3-error" style={{display: s3Error ? "block" : "none"}} className="hidden text-red-500 text-sm font-semibold text-center mt-4">Noget gik galt — skriv til kontakt@getmait.dk</p>
+                        ) : (
+                            <div className="text-center space-y-8 py-4">
+                                <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-mait/10 border-2 border-mait/20 mx-auto relative">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mait"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <span className="absolute inset-0 rounded-full border-2 border-mait/30 animate-ping"></span>
+                                </div>
+                                <div>
+                                    <p className="text-[11px] font-bold text-mait uppercase tracking-widest mb-2">Din Mait er klar</p>
+                                    <h3 className="text-3xl font-extrabold tracking-tight mb-3">Ring og bestil en pizza</h3>
+                                    <p className="text-slate-400 text-lg">Oplev hvordan dine kunder vil blive modt hos {pizzaria || 'dit pizzaria'}</p>
+                                </div>
+                                <a href="tel:+4552515523" className="btn-primary inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-bold text-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    +45 52 51 55 23
+                                </a>
+                                <p className="text-xs text-slate-400 italic">Sig du vil bestille en pizza og oplev resten selv</p>
+                            </div>
+                        )}
                     </div>
     
                 </div>
