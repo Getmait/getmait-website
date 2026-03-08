@@ -29,6 +29,15 @@ export default function Home() {
   const [s1BtnText, setS1BtnText] = useState('Fortsæt til din analyse →');
   const [s2BtnText, setS2BtnText] = useState('Vis mig min personlige analyse →');
 
+  const [vStep, setVStep] = useState(1);
+  const [vNavn, setVNavn] = useState('');
+  const [vTelefon, setVTelefon] = useState('');
+  const [vPizzaria, setVPizzaria] = useState('');
+  const [vLoading, setVLoading] = useState(false);
+  const [vDone, setVDone] = useState(false);
+  const [v1Error, setV1Error] = useState(false);
+  const [v2Error, setV2Error] = useState(false);
+
   function calcROI(calls: number, order: number) {
     const annualRevenue = Math.round(calls * (order * 1.15) * 52);
     const upsellAmount = Math.round(calls * (order * 0.15) * 52);
@@ -73,6 +82,27 @@ export default function Home() {
     } catch { /* fortsæt alligevel */ }
     setStep(2);
     setS1BtnText('Fortsæt til din analyse →');
+  }
+
+  function vSubmit1() {
+    if (!vNavn || !vTelefon) { setV1Error(true); return; }
+    setV1Error(false);
+    setVStep(2);
+  }
+
+  async function vSubmit2() {
+    if (!vPizzaria) { setV2Error(true); return; }
+    setV2Error(false);
+    setVLoading(true);
+    try {
+      await fetch('https://n8n.getmait.dk/webhook/getmait-voice-demo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ navn: vNavn, telefon: vTelefon, pizzaria: vPizzaria }),
+      });
+    } catch { /* forsaet alligevel */ }
+    setVLoading(false);
+    setVDone(true);
   }
 
   function typeWriter(text: string, speed = 18) {
@@ -151,7 +181,7 @@ export default function Home() {
                     <a href="#problem" className="hover:text-mait transition">Hvorfor nu?</a>
                     <a href="#voice" className="hover:text-mait transition">Voice AI</a>
                     <a href="#roi" className="hover:text-mait transition">ROI Beregner</a>
-                    <a href="#dashboard" className="hover:text-mait transition">Dashboard</a>
+                    <a href="#ring-mig" className="hover:text-mait transition">Hor Mait</a>
                 </div>
     
                 <div className="flex items-center gap-4">
@@ -412,6 +442,91 @@ export default function Home() {
             </div>
         </section>
     
+        {/* Voice Demo Lead Magnet */}
+        <section id="ring-mig" className="py-32 px-6 bg-slate-900 text-white rounded-[64px] mx-6 overflow-hidden relative">
+            <div className="absolute top-0 left-0 w-1/2 h-full bg-mait/10 blur-[120px] rounded-full pointer-events-none"></div>
+            <div className="max-w-2xl mx-auto relative z-10">
+
+                <div className="text-center mb-12">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-mait/20 border border-mait/30 mb-8 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mait animate-pulse"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span className="absolute inset-0 rounded-full border-2 border-mait/40 animate-ping"></span>
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+                        Hor din egen <span className="text-mait">Mait</span> ringe dig op
+                    </h2>
+                    <p className="text-slate-400 text-lg">Indtast dit nummer og dit pizzarianavn. Mait ringer dig op inden for 2 minutter og demonstrerer, hvad hun kan gore for din forretning.</p>
+                </div>
+
+                {!vDone ? (
+                    <div className="bg-white/5 border border-white/10 rounded-3xl p-10 md:p-14">
+
+                        <div className="flex items-center gap-3 mb-10">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${vStep >= 1 ? 'bg-mait text-white shadow-lg shadow-orange-500/30' : 'bg-white/10 text-slate-500'}`}>1</div>
+                            <div className={`flex-1 h-0.5 transition-all duration-500 ${vStep >= 2 ? 'bg-green-500' : 'bg-white/10'}`}></div>
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${vStep >= 2 ? 'bg-mait text-white shadow-lg shadow-orange-500/30' : 'bg-white/10 text-slate-500'}`}>2</div>
+                        </div>
+
+                        {vStep === 1 && (
+                            <div className="space-y-5">
+                                <div>
+                                    <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-4">Trin 1 af 2</p>
+                                    <h3 className="text-2xl font-extrabold mb-1 tracking-tight">Hvem skal Mait ringe til?</h3>
+                                    <p className="text-slate-400 text-sm mb-6">Vi ringer dig op med det samme.</p>
+                                </div>
+                                <div>
+                                    <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Dit navn</label>
+                                    <input value={vNavn} onChange={e => setVNavn(e.target.value)} type="text" placeholder="Fornavn Efternavn" className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-sm font-semibold text-white placeholder-slate-600 focus:outline-none focus:border-mait transition" />
+                                </div>
+                                <div>
+                                    <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Telefonnummer</label>
+                                    <input value={vTelefon} onChange={e => setVTelefon(e.target.value)} type="tel" placeholder="+45 12 34 56 78" className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-sm font-semibold text-white placeholder-slate-600 focus:outline-none focus:border-mait transition" />
+                                </div>
+                                {v1Error && <p className="text-red-400 text-sm font-semibold">Udfyld venligst begge felter.</p>}
+                                <button onClick={vSubmit1} className="w-full btn-primary py-5 rounded-xl font-bold text-lg mt-2">
+                                    Naeste trin →
+                                </button>
+                            </div>
+                        )}
+
+                        {vStep === 2 && (
+                            <div className="space-y-5">
+                                <div>
+                                    <p className="text-[11px] font-bold text-mait uppercase tracking-[0.2em] mb-4">Trin 2 af 2</p>
+                                    <h3 className="text-2xl font-extrabold mb-1 tracking-tight">Hvad hedder dit pizzaria?</h3>
+                                    <p className="text-slate-400 text-sm mb-6">Mait presenter sig med dit pizzarianavn naer hun ringer.</p>
+                                </div>
+                                <div>
+                                    <label className="text-[11px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Pizzarianavn</label>
+                                    <input value={vPizzaria} onChange={e => setVPizzaria(e.target.value)} type="text" placeholder="Ex. Napoli Pizza" className="w-full bg-white/5 border border-white/15 rounded-xl px-5 py-4 text-sm font-semibold text-white placeholder-slate-600 focus:outline-none focus:border-mait transition" autoFocus />
+                                </div>
+                                {v2Error && <p className="text-red-400 text-sm font-semibold">Skriv venligst dit pizzarianavn.</p>}
+                                <button onClick={vSubmit2} disabled={vLoading} className="w-full btn-primary py-5 rounded-xl font-bold text-lg mt-2 disabled:opacity-60">
+                                    {vLoading ? 'Ringer op...' : 'Ring mig op nu →'}
+                                </button>
+                                <p className="text-center text-xs text-slate-600 italic">Ingen binding. Ingen spam. Kun en rigtig demonstration.</p>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className="bg-white/5 border border-white/10 rounded-3xl p-10 md:p-14 text-center space-y-6">
+                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/20 border border-green-500/30 mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-green-400"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <h3 className="text-3xl font-extrabold tracking-tight">Mait ringer dig op!</h3>
+                        <p className="text-slate-400 text-lg">Hold din telefon klar, {vNavn}. Mait fra {vPizzaria} ringer dig op inden for 2 minutter.</p>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-400 text-sm font-semibold">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+                            </span>
+                            Opkald er sat i ko
+                        </div>
+                    </div>
+                )}
+            </div>
+        </section>
+
         {/* AI Sales Funnel */}
         <section id="demo" className="py-32 px-6">
             <div className="max-w-2xl mx-auto">
