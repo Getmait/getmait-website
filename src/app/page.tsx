@@ -7,8 +7,8 @@ type Selections = { opkald: string | null; ordre: string | null };
 export default function Home() {
   const callsSliderRef = useRef<HTMLInputElement>(null);
   const orderSliderRef = useRef<HTMLInputElement>(null);
-  const [callsDisplay, setCallsDisplay] = useState(50);
-  const [orderDisplay, setOrderDisplay] = useState(250);
+  const [callsDisplay, setCallsDisplay] = useState(40);
+  const [orderDisplay, setOrderDisplay] = useState(175);
   const [roiResult, setRoiResult] = useState('');
   const [upsellText, setUpsellText] = useState('');
   const [timeText, setTimeText] = useState('');
@@ -231,17 +231,17 @@ export default function Home() {
                             <div className="space-y-6">
                                 <div className="flex justify-between items-center font-bold">
                                     <label className="text-slate-400 uppercase text-xs tracking-widest leading-none">Ubesvarede opkald pr. uge</label>
-                                    <span id="callsDisplay" className="text-2xl text-slate-900">40</span>
+                                    <span className="text-2xl text-slate-900">{callsDisplay}</span>
                                 </div>
-                                <input type="range" id="callsSlider" ref={callsSliderRef} onInput={updateROI} min="0" max="150" value="40" className="w-full" />
+                                <input type="range" ref={callsSliderRef} onInput={updateROI} min="0" max="150" defaultValue="40" className="w-full" />
                             </div>
     
                             <div className="space-y-6">
                                 <div className="flex justify-between items-center font-bold">
                                     <label className="text-slate-400 uppercase text-xs tracking-widest leading-none">Gennemsnitsordre (kr)</label>
-                                    <span id="orderDisplay" className="text-2xl text-slate-900">175</span>
+                                    <span className="text-2xl text-slate-900">{orderDisplay}</span>
                                 </div>
-                                <input type="range" id="orderSlider" ref={orderSliderRef} onInput={updateROI} min="100" max="500" step="5" value="175" className="w-full" />
+                                <input type="range" ref={orderSliderRef} onInput={updateROI} min="100" max="500" step="5" defaultValue="175" className="w-full" />
                             </div>
                         </div>
                     </div>
@@ -252,18 +252,18 @@ export default function Home() {
                         <div className="relative z-10 space-y-10 text-center">
                             <div className="space-y-2">
                                 <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">Årlig værditilvækst</p>
-                                <div className="text-6xl md:text-7xl font-black text-white tracking-tighter" id="roiResult">364.000,-</div>
+                                <div className="text-4xl md:text-5xl font-black text-mait tracking-tighter break-all">{roiResult}</div>
                             </div>
     
                             <div className="h-px bg-white/10 w-full"></div>
     
                             <div className="grid grid-cols-2 gap-8">
                                 <div className="text-left space-y-1">
-                                    <span className="block text-2xl font-extrabold text-mait" id="upsellText">+31.500 kr.</span>
+                                    <span className="block text-2xl font-extrabold text-mait">{upsellText}</span>
                                     <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Gevinst ved mersalg</span>
                                 </div>
                                 <div className="text-left space-y-1 border-l border-white/5 pl-8">
-                                    <span className="block text-2xl font-extrabold text-white" id="timeText">520t</span>
+                                    <span className="block text-2xl font-extrabold text-white">{timeText}</span>
                                     <span className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">Frigjort tid / år</span>
                                 </div>
                             </div>
