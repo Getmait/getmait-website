@@ -4,86 +4,9 @@ export const metadata: Metadata = {
   title: "Privatlivspolitik | Getmait",
 };
 
-const sections = [
-  { num: "1", title: "Dataansvarlig" },
-  { num: "2", title: "Hvilke oplysninger indsamler vi?" },
-  { num: "3", title: "Formål og retsgrundlag" },
-  { num: "4", title: "Opbevaring og sletning" },
-  { num: "5", title: "Databehandlere" },
-  { num: "6", title: "Overførsel til tredjelande" },
-  { num: "7", title: "Dine rettigheder" },
-  { num: "8", title: "Klage" },
-  { num: "9", title: "Cookies" },
-  { num: "10", title: "Ændringer" },
-];
-
-function SectionHeader({ num, title }: { num: string; title: string }) {
-  return (
-    <div className="flex items-center gap-4 mt-12 mb-5 first:mt-0">
-      <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-orange-50 border border-orange-100 flex items-center justify-center">
-        <span className="text-[13px] font-black text-mait">{num}</span>
-      </div>
-      <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">{title}</h2>
-    </div>
-  );
-}
-
-function Divider() {
-  return <div className="border-t border-slate-100 my-10" />;
-}
-
-const processors = [
-  {
-    name: "Twilio Inc.",
-    country: "USA",
-    role: "Telefoni og SMS-håndtering",
-    transfer: "SCC",
-    url: "https://www.twilio.com/en-us/legal/privacy",
-  },
-  {
-    name: "Google LLC",
-    country: "USA/EU",
-    role: "Tale-til-tekst og tekst-til-tale",
-    transfer: "SCC",
-    url: "https://cloud.google.com/privacy",
-  },
-  {
-    name: "Anthropic PBC",
-    country: "USA",
-    role: "AI-sprogmodel til samtaleforståelse",
-    transfer: "SCC",
-    url: "https://www.anthropic.com/privacy",
-  },
-  {
-    name: "Supabase Inc.",
-    country: "USA/EU",
-    role: "Databasehosting (primært EU)",
-    transfer: "SCC",
-    url: "https://supabase.com/privacy",
-  },
-  {
-    name: "n8n GmbH",
-    country: "Tyskland · EU",
-    role: "Workflow-automatisering",
-    transfer: "EU/EØS",
-    url: null,
-  },
-];
-
-const rights = [
-  { title: "Indsigt", desc: "Ret til at se, hvilke oplysninger vi behandler om dig" },
-  { title: "Berigtigelse", desc: "Ret til at få ukorrekte oplysninger rettet" },
-  { title: "Sletning", desc: 'Ret til at få dine oplysninger slettet ("retten til at blive glemt"), med forbehold for lovpligtig opbevaring' },
-  { title: "Begrænsning", desc: "Ret til at anmode om midlertidig begrænsning af behandlingen" },
-  { title: "Dataportabilitet", desc: "Ret til at modtage dine data i et struktureret, maskinlæsbart format" },
-  { title: "Indsigelse", desc: "Ret til at gøre indsigelse mod behandling baseret på legitim interesse" },
-  { title: "Tilbagekaldelse", desc: "Ret til at trække et samtykke tilbage uden virkning for den forudgående behandling" },
-];
-
 export default function Page() {
   return (
     <>
-      {/* Nav */}
       <nav className="fixed top-0 w-full z-50 glass-nav border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <a href="/" className="flex items-center gap-2.5">
@@ -92,221 +15,124 @@ export default function Page() {
             </div>
             <span className="text-xl font-extrabold tracking-tight">Get<span className="text-mait">mait</span></span>
           </a>
-          <a href="/" className="btn-primary px-7 py-3 rounded-full text-sm font-bold">
-            Tilbage til forsiden
-          </a>
+          <a href="/" className="btn-primary px-7 py-3 rounded-full text-sm font-bold">Tilbage til forsiden</a>
         </div>
       </nav>
 
-      {/* Hero */}
       <div className="pt-40 pb-16 px-6" style={{backgroundImage: "radial-gradient(at 100% 0%, rgba(234,88,12,0.08) 0%, transparent 50%)"}}>
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 text-slate-500 text-[11px] font-bold uppercase tracking-[0.1em] mb-8 shadow-sm">
             Lovpligtig information
           </div>
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-slate-900 mb-6">Privatlivspolitik</h1>
-          <p className="text-slate-400 text-base font-medium">Gældende fra 1. januar 2026 · GetMait ApS · CVR 12345678</p>
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-slate-900 mb-4">Privatlivspolitik</h1>
+          <p className="text-slate-400 text-sm">Gældende fra 1. januar 2026 · GetMait ApS · CVR 12345678</p>
         </div>
       </div>
 
       <main className="px-6 pb-32">
-        <div className="max-w-3xl mx-auto space-y-6">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-white border border-slate-100 rounded-3xl shadow-sm px-10 md:px-14 py-14">
+            <div className="space-y-10 text-[15px] text-slate-600 leading-relaxed">
 
-          {/* Intro */}
-          <div className="bg-orange-50 border border-orange-100 rounded-2xl px-8 py-6">
-            <p className="text-slate-700 text-[15px] leading-relaxed">Vi tager dit privatliv alvorligt. Denne politik forklarer tydeligt, hvilke data vi indsamler, hvorfor vi gør det, og hvilke rettigheder du har som registreret.</p>
-          </div>
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">1. Dataansvarlig</h2>
+                <p>Den dataansvarlige for behandling af personoplysninger er GetMait ApS, Tarphagevej 34, 6700 Esbjerg, CVR 12345678 · <a href="mailto:kontakt@getmait.dk" className="text-mait font-semibold hover:underline">kontakt@getmait.dk</a>.</p>
+              </section>
 
-          {/* Indholdsfortegnelse */}
-          <div className="bg-white border border-slate-100 rounded-2xl px-8 py-6 shadow-sm">
-            <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-4">Indhold</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6">
-              {sections.map((s) => (
-                <a key={s.num} href={`#s${s.num}`} className="flex items-center gap-3 group">
-                  <span className="text-[11px] font-black text-mait w-5">{s.num}.</span>
-                  <span className="text-sm text-slate-500 group-hover:text-slate-900 transition">{s.title}</span>
-                </a>
-              ))}
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">2. Hvilke oplysninger indsamler vi?</h2>
+                <p className="mb-3">Getmait indsamler og behandler følgende kategorier af personoplysninger:</p>
+                <p className="mb-2"><strong className="text-slate-800">Kontaktoplysninger:</strong> Navn, e-mailadresse og telefonnummer, som du oplyser ved demo-booking eller indgåelse af aftale.</p>
+                <p className="mb-2"><strong className="text-slate-800">Virksomhedsoplysninger:</strong> Restaurantens navn og adresse til konfiguration af Voice AI.</p>
+                <p className="mb-2"><strong className="text-slate-800">Samtaledata:</strong> Transskriptioner af AI-håndterede opkald og chat-samtaler til kvalitetssikring og modeloptimering, såfremt der er givet samtykke hertil.</p>
+                <p className="mb-2"><strong className="text-slate-800">Brugsdata:</strong> Tekniske data om brug af platformen og dashboardet, herunder tidsstempler og interaktionsmønstre.</p>
+                <p><strong className="text-slate-800">Betalingsoplysninger:</strong> Faktureringsdata behandles via godkendt betalingsformidler og opbevares ikke direkte af Getmait.</p>
+              </section>
+
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">3. Formål og retsgrundlag</h2>
+                <p className="mb-2"><strong className="text-slate-800">Kontraktopfyldelse (GDPR art. 6(1)(b)):</strong> Levering, konfiguration og support af vores Voice AI-platform.</p>
+                <p className="mb-2"><strong className="text-slate-800">Legitim interesse (art. 6(1)(f)):</strong> Forbedring af systemkvalitet, fejlretning og interne analyser.</p>
+                <p className="mb-2"><strong className="text-slate-800">Samtykke (art. 6(1)(a)):</strong> Samtaledata til modeloptimering — du kan til enhver tid trække dit samtykke tilbage.</p>
+                <p><strong className="text-slate-800">Retlig forpligtelse (art. 6(1)(c)):</strong> Opbevaring af regnskabsdata i henhold til bogføringsloven.</p>
+              </section>
+
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">4. Opbevaring og sletning</h2>
+                <p className="mb-2">Personoplysninger opbevares ikke længere end nødvendigt for det formål, hvortil de er indsamlet:</p>
+                <p className="mb-2"><strong className="text-slate-800">Kundekontaktdata</strong> slettes senest 12 måneder efter aftalens ophør, medmindre lovgivning kræver længere opbevaring.</p>
+                <p className="mb-2"><strong className="text-slate-800">Samtaledata</strong> slettes løbende efter 90 dage.</p>
+                <p className="mb-2"><strong className="text-slate-800">Regnskabsbilag</strong> opbevares i 5 år i overensstemmelse med bogføringsloven.</p>
+                <p><strong className="text-slate-800">Tekniske logfiler</strong> slettes automatisk efter 30 dage.</p>
+              </section>
+
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">5. Deling med tredjeparter og databehandlere</h2>
+                <p className="mb-3">Getmait videregiver kun personoplysninger til myndigheder (lovpligtigt) eller ved virksomhedsoverdragelse. Vi sælger aldrig data til markedsføring.</p>
+                <p className="mb-3">Getmait anvender følgende godkendte underdatabehandlere, der alle er bundet af databehandleraftaler og lever op til GDPR's krav:</p>
+                <p className="mb-2"><strong className="text-slate-800">Twilio Inc.</strong> (USA) — Telefoni og SMS-håndtering. Overførsel via EU-standardkontraktbestemmelser (SCC). <a href="https://www.twilio.com/en-us/legal/privacy" className="text-mait font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Privatlivspolitik</a></p>
+                <p className="mb-2"><strong className="text-slate-800">Google LLC</strong> (USA/EU) — Tale-til-tekst og tekst-til-tale. Overførsel via SCC. <a href="https://cloud.google.com/privacy" className="text-mait font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Privatlivspolitik</a></p>
+                <p className="mb-2"><strong className="text-slate-800">Anthropic PBC</strong> (USA) — AI-sprogmodel til samtaleforståelse. Overførsel via SCC. <a href="https://www.anthropic.com/privacy" className="text-mait font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Privatlivspolitik</a></p>
+                <p className="mb-2"><strong className="text-slate-800">Supabase Inc.</strong> (USA/EU) — Databasehosting, primært placeret i EU. Overførsel via SCC. <a href="https://supabase.com/privacy" className="text-mait font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Privatlivspolitik</a></p>
+                <p><strong className="text-slate-800">n8n GmbH</strong> (Tyskland, EU) — Workflow-automatisering. Data behandles inden for EU/EØS.</p>
+              </section>
+
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">6. Overførsel til tredjelande</h2>
+                <p>Vores primære datainfrastruktur er placeret i EU/EØS. Visse underleverandørers tjenester kan involvere behandling uden for EU. I sådanne tilfælde sker overførslen på baggrund af EU-Kommissionens standardkontraktbestemmelser (SCC) eller tilsvarende passende garantier jf. GDPR kap. V.</p>
+              </section>
+
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">7. Dine rettigheder</h2>
+                <p className="mb-3">Som registreret har du følgende rettigheder under GDPR:</p>
+                <p className="mb-2"><strong className="text-slate-800">Indsigt:</strong> Ret til at se, hvilke oplysninger vi behandler om dig.</p>
+                <p className="mb-2"><strong className="text-slate-800">Berigtigelse:</strong> Ret til at få ukorrekte oplysninger rettet.</p>
+                <p className="mb-2"><strong className="text-slate-800">Sletning:</strong> Ret til at få dine oplysninger slettet, med forbehold for lovpligtig opbevaring.</p>
+                <p className="mb-2"><strong className="text-slate-800">Begrænsning:</strong> Ret til at anmode om midlertidig begrænsning af behandlingen.</p>
+                <p className="mb-2"><strong className="text-slate-800">Dataportabilitet:</strong> Ret til at modtage dine data i et struktureret, maskinlæsbart format.</p>
+                <p className="mb-2"><strong className="text-slate-800">Indsigelse:</strong> Ret til at gøre indsigelse mod behandling baseret på legitim interesse.</p>
+                <p className="mb-4"><strong className="text-slate-800">Tilbagekaldelse af samtykke:</strong> Ret til at trække et samtykke tilbage uden virkning for den forudgående behandling.</p>
+                <p>For at udøve dine rettigheder, kontakt os på <a href="mailto:kontakt@getmait.dk" className="text-mait font-semibold hover:underline">kontakt@getmait.dk</a>. Vi besvarer din henvendelse inden for 30 dage.</p>
+              </section>
+
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">8. Klage</h2>
+                <p>Du har ret til at indgive klage til Datatilsynet, Carl Jacobsens Vej 35, 2500 Valby — <a href="https://www.datatilsynet.dk" target="_blank" rel="noopener noreferrer" className="text-mait font-semibold hover:underline">datatilsynet.dk</a> · <a href="mailto:dt@datatilsynet.dk" className="text-mait font-semibold hover:underline">dt@datatilsynet.dk</a>.</p>
+              </section>
+
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">9. Cookies</h2>
+                <p>Getmaits hjemmeside anvender teknisk nødvendige cookies til at sikre korrekt funktionalitet samt analytiske cookies til forståelse af brugeradfærd. Du kan til enhver tid ændre dine cookie-præferencer via cookiebanneret i bunden af siden.</p>
+              </section>
+
+              <div className="border-t border-slate-100" />
+
+              <section>
+                <h2 className="text-base font-black uppercase tracking-widest text-slate-400 mb-3">10. Ændringer</h2>
+                <p>Getmait opdaterer løbende denne privatlivspolitik i takt med ændringer i lovgivning eller vores databehandlingspraksis. Væsentlige ændringer varsles via e-mail til aktive kunder med mindst 14 dages forudgående orientering.</p>
+              </section>
+
             </div>
-          </div>
-
-          {/* Indhold */}
-          <div className="bg-white border border-slate-100 rounded-3xl shadow-sm px-10 md:px-16 py-12">
-
-            {/* 1 */}
-            <div id="s1">
-              <SectionHeader num="1" title="Dataansvarlig" />
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-4">Den dataansvarlige for behandling af personoplysninger er:</p>
-              <div className="bg-slate-50 rounded-2xl px-6 py-5 text-[14px] text-slate-700 space-y-1">
-                <p className="font-bold text-slate-900">GetMait ApS</p>
-                <p>Tarphagevej 34, 6700 Esbjerg</p>
-                <p>CVR: 12345678</p>
-                <p>E-mail: <a href="mailto:kontakt@getmait.dk" className="text-mait font-semibold hover:underline">kontakt@getmait.dk</a></p>
-              </div>
-            </div>
-
-            <Divider />
-
-            {/* 2 */}
-            <div id="s2">
-              <SectionHeader num="2" title="Hvilke oplysninger indsamler vi?" />
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Getmait indsamler og behandler følgende kategorier af personoplysninger:</p>
-              <div className="space-y-3">
-                {[
-                  { label: "Kontaktoplysninger", desc: "Navn, e-mailadresse og telefonnummer, som du oplyser ved demo-booking eller indgåelse af aftale" },
-                  { label: "Virksomhedsoplysninger", desc: "Restaurantens navn og adresse til konfiguration af Voice AI" },
-                  { label: "Samtaledata", desc: "Transskriptioner af AI-håndterede opkald og chat-samtaler til kvalitetssikring og modeloptimering, såfremt der er givet samtykke hertil" },
-                  { label: "Brugsdata", desc: "Tekniske data om brug af platformen og dashboardet, herunder tidsstempler og interaktionsmønstre" },
-                  { label: "Betalingsoplysninger", desc: "Faktureringsdata behandles via godkendt betalingsformidler og opbevares ikke direkte af Getmait" },
-                ].map((item) => (
-                  <div key={item.label} className="flex gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                    <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-mait mt-2"></div>
-                    <div>
-                      <span className="text-[13px] font-bold text-slate-900">{item.label}: </span>
-                      <span className="text-[13px] text-slate-600">{item.desc}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Divider />
-
-            {/* 3 */}
-            <div id="s3">
-              <SectionHeader num="3" title="Formål og retsgrundlag" />
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Vi behandler dine personoplysninger til følgende formål:</p>
-              <div className="space-y-3">
-                {[
-                  { basis: "Kontraktopfyldelse", art: "art. 6(1)(b)", desc: "Levering, konfiguration og support af vores Voice AI-platform" },
-                  { basis: "Legitim interesse", art: "art. 6(1)(f)", desc: "Forbedring af systemkvalitet, fejlretning og interne analyser" },
-                  { basis: "Samtykke", art: "art. 6(1)(a)", desc: "Samtaledata til modeloptimering — du kan til enhver tid trække dit samtykke tilbage" },
-                  { basis: "Retlig forpligtelse", art: "art. 6(1)(c)", desc: "Opbevaring af regnskabsdata i henhold til bogføringsloven" },
-                ].map((item) => (
-                  <div key={item.basis} className="flex gap-4 p-4 rounded-xl border border-slate-100">
-                    <div className="flex-shrink-0">
-                      <span className="inline-block px-2 py-1 rounded-md bg-orange-50 text-mait text-[11px] font-black">{item.art}</span>
-                    </div>
-                    <div>
-                      <span className="text-[13px] font-bold text-slate-900">{item.basis}: </span>
-                      <span className="text-[13px] text-slate-600">{item.desc}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Divider />
-
-            {/* 4 */}
-            <div id="s4">
-              <SectionHeader num="4" title="Opbevaring og sletning" />
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Personoplysninger opbevares ikke længere end nødvendigt:</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {[
-                  { type: "Kundekontaktdata", period: "12 måneder", note: "efter aftalens ophør" },
-                  { type: "Samtaledata", period: "90 dage", note: "løbende sletning" },
-                  { type: "Regnskabsbilag", period: "5 år", note: "bogføringsloven" },
-                  { type: "Tekniske logfiler", period: "30 dage", note: "automatisk sletning" },
-                ].map((item) => (
-                  <div key={item.type} className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50">
-                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.type}</p>
-                    <p className="text-2xl font-extrabold text-slate-900 tracking-tight">{item.period}</p>
-                    <p className="text-[12px] text-slate-500 mt-0.5">{item.note}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Divider />
-
-            {/* 5 */}
-            <div id="s5">
-              <SectionHeader num="5" title="Databehandlere" />
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-2">Getmait videregiver kun personoplysninger til myndigheder (lovpligtigt) eller ved virksomhedsoverdragelse. Vi sælger aldrig data til markedsføring.</p>
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Følgende godkendte underdatabehandlere behandler data på vores vegne — alle er bundet af databehandleraftaler:</p>
-              <div className="space-y-3">
-                {processors.map((p) => (
-                  <div key={p.name} className="flex items-start gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50/30">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <span className="text-[14px] font-bold text-slate-900">{p.name}</span>
-                        <span className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 font-semibold">{p.country}</span>
-                        <span className="text-[11px] px-2 py-0.5 rounded-full bg-orange-50 text-mait font-bold">{p.transfer}</span>
-                      </div>
-                      <p className="text-[13px] text-slate-600">{p.role}</p>
-                    </div>
-                    {p.url && (
-                      <a href={p.url} target="_blank" rel="noopener noreferrer" className="flex-shrink-0 text-[12px] text-mait font-semibold hover:underline whitespace-nowrap">
-                        Politik →
-                      </a>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Divider />
-
-            {/* 6 */}
-            <div id="s6">
-              <SectionHeader num="6" title="Overførsel til tredjelande" />
-              <p className="text-slate-600 text-[15px] leading-relaxed">Vores primære datainfrastruktur er placeret i EU/EØS. Visse underleverandørers tjenester kan involvere behandling uden for EU. I sådanne tilfælde sker overførslen på baggrund af EU-Kommissionens standardkontraktbestemmelser (SCC) eller tilsvarende passende garantier jf. GDPR kap. V.</p>
-            </div>
-
-            <Divider />
-
-            {/* 7 */}
-            <div id="s7">
-              <SectionHeader num="7" title="Dine rettigheder" />
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Som registreret har du følgende rettigheder under GDPR:</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                {rights.map((r) => (
-                  <div key={r.title} className="p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                    <p className="text-[13px] font-bold text-slate-900 mb-1">{r.title}</p>
-                    <p className="text-[12px] text-slate-500 leading-relaxed">{r.desc}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="bg-orange-50 border border-orange-100 rounded-2xl px-6 py-4">
-                <p className="text-[14px] text-slate-700">For at udøve dine rettigheder, kontakt os på <a href="mailto:kontakt@getmait.dk" className="text-mait font-semibold hover:underline">kontakt@getmait.dk</a>. Vi besvarer din henvendelse inden for 30 dage.</p>
-              </div>
-            </div>
-
-            <Divider />
-
-            {/* 8 */}
-            <div id="s8">
-              <SectionHeader num="8" title="Klage" />
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-4">Du har ret til at indgive klage til Datatilsynet, hvis du mener, at Getmait behandler dine personoplysninger i strid med GDPR:</p>
-              <div className="bg-slate-50 rounded-2xl px-6 py-5 text-[14px] text-slate-700 space-y-1">
-                <p className="font-bold text-slate-900">Datatilsynet</p>
-                <p>Carl Jacobsens Vej 35, 2500 Valby</p>
-                <p><a href="https://www.datatilsynet.dk" target="_blank" rel="noopener noreferrer" className="text-mait font-semibold hover:underline">datatilsynet.dk</a> · <a href="mailto:dt@datatilsynet.dk" className="text-mait font-semibold hover:underline">dt@datatilsynet.dk</a></p>
-              </div>
-            </div>
-
-            <Divider />
-
-            {/* 9 */}
-            <div id="s9">
-              <SectionHeader num="9" title="Cookies" />
-              <p className="text-slate-600 text-[15px] leading-relaxed">Getmaits hjemmeside anvender teknisk nødvendige cookies til at sikre korrekt funktionalitet. Vi anvender derudover analytiske cookies til forståelse af brugeradfærd, og markedsføringscookies såfremt dit samtykke indhentes via vores cookiebanner. Du kan til enhver tid ændre dine cookie-præferencer via cookiebanneret i bunden af siden.</p>
-            </div>
-
-            <Divider />
-
-            {/* 10 */}
-            <div id="s10">
-              <SectionHeader num="10" title="Ændringer" />
-              <p className="text-slate-600 text-[15px] leading-relaxed">Getmait opdaterer løbende denne privatlivspolitik i takt med ændringer i lovgivning eller vores databehandlingspraksis. Væsentlige ændringer varsles via e-mail til aktive kunder med mindst 14 dages forudgående orientering. Den aktuelle version vil altid være tilgængelig på getmait.dk.</p>
-            </div>
-
           </div>
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="bg-white border-t border-slate-100 px-6 py-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-400 font-mono uppercase tracking-widest">
           <p>© 2026 GetMait ApS — CVR 12345678 — Alle rettigheder forbeholdes</p>
