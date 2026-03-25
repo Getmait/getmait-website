@@ -252,7 +252,7 @@ export default function Home() {
                         <div className="relative z-10 space-y-10 text-center">
                             <div className="space-y-2">
                                 <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">Årlig værditilvækst</p>
-                                <div className="text-6xl md:text-7xl font-black text-white tracking-tighter">{roiResult}</div>
+                                <div className="text-4xl md:text-5xl font-black text-mait tracking-tighter break-all">{roiResult}</div>
                             </div>
     
                             <div className="h-px bg-white/10 w-full"></div>
