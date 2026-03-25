@@ -521,9 +521,9 @@ export default function Home() {
                                     <h3 className="text-3xl font-extrabold tracking-tight mb-3">Ring og bestil en pizza</h3>
                                     <p className="text-slate-400 text-lg">Oplev hvordan dine kunder vil blive mødt hos {pizzaria || 'dit pizzaria'}</p>
                                 </div>
-                                <a href="tel:+4552515523" className="btn-primary inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-bold text-xl">
+                                <a href="tel:+4552515498" className="btn-primary inline-flex items-center gap-3 px-10 py-5 rounded-2xl font-bold text-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                    +45 52 51 55 23
+                                    +45 52 51 54 98
                                 </a>
                                 <p className="text-xs text-slate-400 italic">Sig du vil bestille en pizza og oplev resten selv</p>
                             </div>
