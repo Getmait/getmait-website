@@ -125,7 +125,6 @@ export default function Page() {
           <div className="flex gap-6">
             <a href="/handelsbetingelser" className="hover:text-mait transition">Handelsbetingelser</a>
             <a href="/privatlivspolitik" className="hover:text-mait transition">Privatlivspolitik</a>
-            <a href="/databehandleraftale" className="hover:text-mait transition">Databehandleraftale</a>
           </div>
         </div>
       </footer>
