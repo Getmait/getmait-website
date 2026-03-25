@@ -79,14 +79,21 @@ export default function Page() {
                           <li>Tekniske logfiler slettes automatisk efter 30 dage</li>
                       </ul>
       
-                      <h2>5. Deling med tredjeparter</h2>
+                      <h2>5. Deling med tredjeparter og databehandlere</h2>
                       <p>Getmait videregiver kun personoplysninger til tredjeparter i følgende tilfælde:</p>
                       <ul>
-                          <li><strong>Databehandlere:</strong> Underleverandører, der behandler data på vores vegne (fx cloud-hosting, STT-tjenester) og er bundet af en databehandleraftale</li>
                           <li><strong>Lovpligtig videregivelse:</strong> Til myndigheder, når dette kræves af dansk eller europæisk lovgivning</li>
                           <li><strong>Overdragelse:</strong> Ved salg eller fusion af virksomheden, med forudgående orientering til berørte parter</li>
                       </ul>
                       <p>Vi sælger aldrig dine personoplysninger til tredjepart med henblik på markedsføring.</p>
+                      <p>Getmait anvender følgende godkendte underdatabehandlere, der alle er bundet af databehandleraftaler og lever op til GDPR's krav:</p>
+                      <ul>
+                          <li><strong>Twilio Inc.</strong> (USA) — Telefoni og SMS-håndtering. Overførsel sker på baggrund af EU-Kommissionens standardkontraktbestemmelser (SCC). <a href="https://www.twilio.com/en-us/legal/privacy" className="text-mait font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Privatlivspolitik</a></li>
+                          <li><strong>Google LLC</strong> (USA/EU) — Tale-til-tekst og tekst-til-tale (Google Cloud). Overførsel sker på baggrund af SCC. <a href="https://cloud.google.com/privacy" className="text-mait font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Privatlivspolitik</a></li>
+                          <li><strong>Anthropic PBC</strong> (USA) — AI-sprogmodel til forståelse og behandling af samtaleindhold. Overførsel sker på baggrund af SCC. <a href="https://www.anthropic.com/privacy" className="text-mait font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Privatlivspolitik</a></li>
+                          <li><strong>Supabase Inc.</strong> (USA/EU) — Databasehosting. Data er primært placeret i EU. Overførsel sker på baggrund af SCC. <a href="https://supabase.com/privacy" className="text-mait font-semibold hover:underline" target="_blank" rel="noopener noreferrer">Privatlivspolitik</a></li>
+                          <li><strong>n8n GmbH</strong> (Tyskland, EU) — Workflow-automatisering og procesintegration. Data behandles inden for EU/EØS.</li>
+                      </ul>
       
                       <h2>6. Overførsel til tredjelande</h2>
                       <p>Vores primære datainfrastruktur er placeret i EU/EØS. Visse underleverandørers tjenester (fx AI-sprogmodeller) kan involvere behandling uden for EU. I sådanne tilfælde sker overførslen på baggrund af EU-Kommissionens standardkontraktbestemmelser (SCC) eller tilsvarende passende garantier jf. GDPR kap. V.</p>
@@ -126,8 +133,9 @@ export default function Page() {
               <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-400 font-mono uppercase tracking-widest">
                   <p>© 2026 GetMait ApS — CVR 12345678 — Alle rettigheder forbeholdes</p>
                   <div className="flex gap-6">
-                      <a href="handelsbetingelser.html" className="hover:text-mait transition">Handelsbetingelser</a>
-                      <a href="privatlivspolitik.html" className="hover:text-mait transition">Privatlivspolitik</a>
+                      <a href="/handelsbetingelser" className="hover:text-mait transition">Handelsbetingelser</a>
+                      <a href="/privatlivspolitik" className="hover:text-mait transition">Privatlivspolitik</a>
+                      <a href="/databehandleraftale" className="hover:text-mait transition">Databehandleraftale</a>
                   </div>
               </div>
           </footer>
