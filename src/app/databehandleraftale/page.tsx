@@ -40,6 +40,10 @@ function Divider() {
   return <div className="border-t border-slate-100 my-10" />;
 }
 
+function Dot() {
+  return <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-mait mt-2" />;
+}
+
 export default function Page() {
   return (
     <>
@@ -98,14 +102,14 @@ export default function Page() {
               <SectionHeader num="1" title="Parter" />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50">
-                  <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2">Databehandler</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Databehandler</p>
                   <p className="text-[14px] font-bold text-slate-900">GetMait ApS</p>
                   <p className="text-[13px] text-slate-600">Tarphagevej 34, 6700 Esbjerg</p>
                   <p className="text-[13px] text-slate-600">CVR 12345678</p>
                   <a href="mailto:kontakt@getmait.dk" className="text-[13px] text-mait font-semibold hover:underline">kontakt@getmait.dk</a>
                 </div>
                 <div className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50">
-                  <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-2">Dataansvarlig</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Dataansvarlig</p>
                   <p className="text-[14px] font-bold text-slate-900">Kunden</p>
                   <p className="text-[13px] text-slate-600">Den virksomhed der har indgået serviceaftale med GetMait ApS.</p>
                 </div>
@@ -118,19 +122,16 @@ export default function Page() {
             <div id="s2">
               <SectionHeader num="2" title="Formål og omfang" />
               <p className="text-slate-600 text-[15px] leading-relaxed mb-5">GetMait behandler personoplysninger på den dataansvarliges vegne med henblik på at levere:</p>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[
-                  { icon: "📞", label: "Voice AI", desc: "AI-baseret telefonisk ordremodtagelse" },
-                  { icon: "💬", label: "Chat Widget", desc: "AI-baseret chat-ordremodtagelse" },
-                  { icon: "📱", label: "SMS", desc: "SMS-kommunikation til slutkunder" },
-                  { icon: "📊", label: "Dashboard", desc: "Administration af ordrer og indstillinger" },
+                  { label: "Voice AI", desc: "AI-baseret telefonisk ordremodtagelse" },
+                  { label: "Chat Widget", desc: "AI-baseret chat-ordremodtagelse" },
+                  { label: "SMS", desc: "SMS-kommunikation til slutkunder" },
+                  { label: "Dashboard", desc: "Administration af ordrer og indstillinger" },
                 ].map((item) => (
-                  <div key={item.label} className="flex items-center gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                    <span className="text-lg">{item.icon}</span>
-                    <div>
-                      <span className="text-[13px] font-bold text-slate-900">{item.label}: </span>
-                      <span className="text-[13px] text-slate-600">{item.desc}</span>
-                    </div>
+                  <div key={item.label} className="flex gap-4 px-5 py-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                    <Dot />
+                    <p className="text-[13px] text-slate-600"><span className="font-bold text-slate-900">{item.label}:</span> {item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -142,14 +143,12 @@ export default function Page() {
             <div id="s3">
               <SectionHeader num="3" title="Kategorier af oplysninger" />
               <p className="text-slate-600 text-[15px] leading-relaxed mb-5">GetMait behandler følgende på den dataansvarliges vegne:</p>
-              <div className="space-y-3 mb-5">
-                <div className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50">
-                  <p className="text-[13px] font-bold text-slate-900 mb-1">Slutkunder (restaurantgæster)</p>
-                  <p className="text-[13px] text-slate-600">Telefonnummer, samtaleindhold (transskription af ordresamtaler), bestillingsoplysninger (varelinje, leverings-/afhentningstype, adresse)</p>
-                </div>
+              <div className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 mb-4">
+                <p className="text-[13px] font-bold text-slate-900 mb-1">Slutkunder (restaurantgæster)</p>
+                <p className="text-[13px] text-slate-600">Telefonnummer, samtaleindhold (transskription af ordresamtaler), bestillingsoplysninger (varelinje, leverings-/afhentningstype, adresse)</p>
               </div>
-              <div className="bg-green-50 border border-green-100 rounded-2xl px-5 py-4">
-                <p className="text-[13px] text-green-800 font-medium">GetMait behandler ikke følsomme personoplysninger jf. GDPR art. 9.</p>
+              <div className="bg-slate-50 rounded-2xl px-5 py-4 border border-slate-100">
+                <p className="text-[13px] text-slate-600">GetMait behandler ikke følsomme personoplysninger jf. GDPR art. 9.</p>
               </div>
             </div>
 
@@ -158,7 +157,7 @@ export default function Page() {
             {/* 4 */}
             <div id="s4">
               <SectionHeader num="4" title="GetMaits forpligtelser" />
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[
                   "Behandle personoplysninger udelukkende efter dokumenteret instruks fra den dataansvarlige",
                   "Sikre at autoriserede medarbejdere er underlagt fortrolighed",
@@ -167,7 +166,7 @@ export default function Page() {
                   "Slette eller tilbagelevere alle personoplysninger ved aftalens ophør",
                   "Stille dokumentation til rådighed for overholdelse af denne aftale",
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div key={i} className="flex gap-4 px-5 py-4 rounded-xl border border-slate-100 bg-slate-50/50">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center mt-0.5">
                       <span className="text-[10px] font-black text-mait">{i + 1}</span>
                     </div>
@@ -182,7 +181,7 @@ export default function Page() {
             {/* 5 */}
             <div id="s5">
               <SectionHeader num="5" title="Underdatabehandlere" />
-              <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Den dataansvarlige giver hermed generel skriftlig tilladelse til brug af følgende underdatabehandlere. GetMait varsler ændringer med mindst <strong>14 dages</strong> forudgående meddelelse.</p>
+              <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Den dataansvarlige giver hermed generel skriftlig tilladelse til brug af følgende underdatabehandlere. GetMait varsler ændringer med mindst <strong className="text-slate-900">14 dages</strong> forudgående meddelelse.</p>
               <div className="space-y-3">
                 {processors.map((p) => (
                   <div key={p.name} className="flex items-center gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50/30">
@@ -205,20 +204,17 @@ export default function Page() {
             <div id="s6">
               <SectionHeader num="6" title="Sikkerhed" />
               <p className="text-slate-600 text-[15px] leading-relaxed mb-5">GetMait har implementeret følgende tekniske og organisatoriske foranstaltninger jf. GDPR art. 32:</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="space-y-2">
                 {[
-                  { icon: "🔒", label: "Krypteret transmission", desc: "HTTPS/TLS på alle endpoints" },
-                  { icon: "👤", label: "Adgangskontrol", desc: "Rollebaserede rettigheder" },
-                  { icon: "🗑️", label: "Auto-sletning", desc: "Samtaledata slettes efter 90 dage" },
-                  { icon: "💾", label: "Backup", desc: "Daglig backup, 14 dages opbevaring" },
-                  { icon: "📡", label: "Overvågning", desc: "Løbende monitoring og SMS-alarm" },
+                  { label: "Krypteret transmission", desc: "HTTPS/TLS på alle endpoints" },
+                  { label: "Adgangskontrol", desc: "Rollebaserede rettigheder" },
+                  { label: "Auto-sletning", desc: "Samtaledata slettes efter 90 dage" },
+                  { label: "Backup", desc: "Daglig backup med 14 dages opbevaring" },
+                  { label: "Overvågning", desc: "Løbende monitoring og alarm ved servicefejl" },
                 ].map((item) => (
-                  <div key={item.label} className="flex gap-3 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                    <span className="text-base">{item.icon}</span>
-                    <div>
-                      <p className="text-[13px] font-bold text-slate-900">{item.label}</p>
-                      <p className="text-[12px] text-slate-500">{item.desc}</p>
-                    </div>
+                  <div key={item.label} className="flex gap-4 px-5 py-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                    <Dot />
+                    <p className="text-[13px] text-slate-600"><span className="font-bold text-slate-900">{item.label}:</span> {item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -230,7 +226,7 @@ export default function Page() {
             <div id="s7">
               <SectionHeader num="7" title="Brud på persondatasikkerheden" />
               <div className="bg-orange-50 border border-orange-100 rounded-2xl px-6 py-5 mb-5">
-                <p className="text-[13px] font-black uppercase tracking-widest text-mait mb-1">Varslingstid</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-mait mb-1">Varslingstid</p>
                 <p className="text-3xl font-extrabold text-slate-900">24 timer</p>
                 <p className="text-[13px] text-slate-500 mt-1">efter GetMait er blevet bekendt med bruddet</p>
               </div>

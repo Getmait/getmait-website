@@ -32,6 +32,10 @@ function Divider() {
   return <div className="border-t border-slate-100 my-10" />;
 }
 
+function Dot() {
+  return <div className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-mait mt-2" />;
+}
+
 export default function Page() {
   return (
     <>
@@ -98,20 +102,17 @@ export default function Page() {
             <div id="s2">
               <SectionHeader num="2" title="Ydelser" />
               <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Getmait leverer AI-drevne løsninger til restauranter og lignende virksomheder, herunder:</p>
-              <div className="space-y-3 mb-5">
+              <div className="space-y-2 mb-5">
                 {[
-                  { icon: "📞", label: "Voice AI", desc: "Automatisk opkaldshåndtering og ordremodtagelse" },
-                  { icon: "💬", label: "Chat Widget", desc: "Intelligent mersalg og kundedialog via chat" },
-                  { icon: "📊", label: "Dashboard", desc: "Realtids-dashboard til opfølgning og analyse" },
-                  { icon: "🔗", label: "Integrationer", desc: "Integration til POS- og bestillingssystemer (afhænger af pakke)" },
-                  { icon: "⚙️", label: "AI-optimering", desc: "Løbende opdatering og optimering af AI-modellen" },
+                  { label: "Voice AI", desc: "Automatisk opkaldshåndtering og ordremodtagelse" },
+                  { label: "Chat Widget", desc: "Intelligent mersalg og kundedialog via chat" },
+                  { label: "Dashboard", desc: "Realtids-dashboard til opfølgning og analyse" },
+                  { label: "Integrationer", desc: "Integration til POS- og bestillingssystemer (afhænger af pakke)" },
+                  { label: "AI-optimering", desc: "Løbende opdatering og optimering af AI-modellen" },
                 ].map((item) => (
-                  <div key={item.label} className="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
-                    <span className="text-lg">{item.icon}</span>
-                    <div>
-                      <span className="text-[13px] font-bold text-slate-900">{item.label}: </span>
-                      <span className="text-[13px] text-slate-600">{item.desc}</span>
-                    </div>
+                  <div key={item.label} className="flex gap-4 px-5 py-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                    <Dot />
+                    <p className="text-[13px] text-slate-600"><span className="font-bold text-slate-900">{item.label}:</span> {item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -123,15 +124,15 @@ export default function Page() {
             {/* 3 */}
             <div id="s3">
               <SectionHeader num="3" title="Priser og betaling" />
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+              <div className="grid grid-cols-3 gap-3 mb-5">
                 {[
                   { label: "Fakturering", value: "Månedsvis forud" },
                   { label: "Betalingsbetingelse", value: "8 dage netto" },
                   { label: "Morarente", value: "1,5 % / måned" },
                 ].map((item) => (
                   <div key={item.label} className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50 text-center">
-                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.label}</p>
-                    <p className="text-base font-extrabold text-slate-900">{item.value}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">{item.label}</p>
+                    <p className="text-sm font-extrabold text-slate-900 leading-tight">{item.value}</p>
                   </div>
                 ))}
               </div>
@@ -146,13 +147,13 @@ export default function Page() {
             {/* 4 */}
             <div id="s4">
               <SectionHeader num="4" title="Abonnement og opsigelse" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+              <div className="grid grid-cols-2 gap-3 mb-5">
                 {[
                   { label: "Bindingsperiode", value: "3 måneder" },
                   { label: "Opsigelsesvarsel", value: "30 dage" },
                 ].map((item) => (
                   <div key={item.label} className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50">
-                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.label}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.label}</p>
                     <p className="text-2xl font-extrabold text-slate-900 tracking-tight">{item.value}</p>
                   </div>
                 ))}
@@ -167,14 +168,14 @@ export default function Page() {
             <div id="s5">
               <SectionHeader num="5" title="Kundens forpligtelser" />
               <p className="text-slate-600 text-[15px] leading-relaxed mb-5">Kunden er ansvarlig for:</p>
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {[
                   "At stille nødvendige tekniske oplysninger til rådighed for opsætning (fx telefonnumre, menukort, åbningstider)",
                   "At sikre, at de informationer der gives til Getmait er korrekte og opdaterede",
                   "At informere egne kunder om, at opkald kan blive håndteret af en AI-stemme, i det omfang lovgivningen kræver dette",
                   "At anvende platformen i overensstemmelse med gældende dansk ret og EU-regulering",
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50/50">
+                  <div key={i} className="flex gap-4 px-5 py-4 rounded-xl border border-slate-100 bg-slate-50/50">
                     <div className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center mt-0.5">
                       <span className="text-[10px] font-black text-mait">{i + 1}</span>
                     </div>
@@ -200,13 +201,13 @@ export default function Page() {
             {/* 7 */}
             <div id="s7">
               <SectionHeader num="7" title="Ansvarsbegrænsning" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+              <div className="grid grid-cols-2 gap-3 mb-5">
                 {[
                   { label: "Maks. erstatningsansvar", value: "3 mdr. betaling" },
                   { label: "Tilstræbt oppetid", value: "99,5 % / md." },
                 ].map((item) => (
                   <div key={item.label} className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50">
-                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.label}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.label}</p>
                     <p className="text-lg font-extrabold text-slate-900">{item.value}</p>
                   </div>
                 ))}
@@ -230,13 +231,13 @@ export default function Page() {
             {/* 9 */}
             <div id="s9">
               <SectionHeader num="9" title="Lovvalg og værneting" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3">
                 {[
                   { label: "Lovvalg", value: "Dansk ret" },
                   { label: "Værneting", value: "Retten i Esbjerg" },
                 ].map((item) => (
                   <div key={item.label} className="p-5 rounded-2xl border border-slate-100 bg-slate-50/50">
-                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.label}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">{item.label}</p>
                     <p className="text-lg font-extrabold text-slate-900">{item.value}</p>
                   </div>
                 ))}
