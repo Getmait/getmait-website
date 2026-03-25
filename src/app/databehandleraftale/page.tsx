@@ -119,12 +119,46 @@ export default function Page() {
         </div>
       </main>
 
-      <footer className="bg-white border-t border-slate-100 px-6 py-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-400 font-mono uppercase tracking-widest">
-          <p>© 2026 GetMait ApS — CVR 12345678 — Alle rettigheder forbeholdes</p>
-          <div className="flex gap-6">
-            <a href="/handelsbetingelser" className="hover:text-mait transition">Handelsbetingelser</a>
-            <a href="/privatlivspolitik" className="hover:text-mait transition">Privatlivspolitik</a>
+      <footer className="bg-white pt-24 pb-12 border-t border-slate-100 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-12 mb-16">
+            <div className="space-y-6">
+              <div className="flex items-center gap-2.5">
+                <div className="bg-mait p-1.5 rounded-lg text-white shadow-lg shadow-orange-600/20">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 11h.01"/><path d="M11 15h.01"/><path d="M16 16h.01"/><path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"/><path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"/></svg>
+                </div>
+                <span className="text-xl font-extrabold tracking-tight text-slate-900">Get<span className="text-mait">mait</span></span>
+              </div>
+              <p className="text-slate-500 text-sm leading-relaxed italic font-medium">Vi transformerer pizzariabranchen gennem menneskelig AI Voice-teknologi — så du kan fokusere på pizzaen, ikke telefonen.</p>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-[0.2em]">Firmaoplysninger</h4>
+              <ul className="text-sm text-slate-500 space-y-2 italic font-medium">
+                <li>GetMait ApS</li>
+                <li>CVR: 12345678</li>
+                <li>Tarphagevej 34</li>
+                <li>6700 Esbjerg</li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-[0.2em]">Kontakt</h4>
+              <ul className="text-sm text-slate-500 space-y-2 italic font-medium">
+                <li><a href="mailto:kontakt@getmait.dk" className="hover:text-mait transition">kontakt@getmait.dk</a></li>
+                <li><a href="tel:+4512345678" className="hover:text-mait transition">+45 12 34 56 78</a></li>
+                <li>Support: 24/7 (AI-overvåget)</li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-[0.2em]">Lovpligtig</h4>
+              <ul className="text-sm text-slate-500 space-y-2 italic font-medium">
+                <li><a href="/handelsbetingelser" className="hover:text-mait transition">Handelsbetingelser</a></li>
+                <li><a href="/privatlivspolitik" className="hover:text-mait transition">Privatlivspolitik</a></li>
+                <li><a href="#" className="hover:text-mait transition">Cookie-indstillinger</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-slate-50 text-center text-[10px] text-slate-400 font-mono uppercase tracking-widest">
+            <p>© 2026 GetMait ApS — CVR 12345678 — Alle rettigheder forbeholdes</p>
           </div>
         </div>
       </footer>
