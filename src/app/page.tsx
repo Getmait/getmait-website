@@ -389,8 +389,8 @@ export default function Home() {
             <div className="max-w-2xl mx-auto">
     
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Prøv din Mait inden du beslutter</h2>
-                    <p className="text-slate-500 text-lg italic">Svar på 2 hurtige spørgsmål og ring til nummeret. Din Mait gør bestillingsopkaldet for dig.</p>
+                    <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Prøv Mait gratis — ingen binding</h2>
+                    <p className="text-slate-500 text-lg italic">Vi sætter det op for dig. Ring og oplev selv hvordan din Mait tager imod bestillinger.</p>
                 </div>
     
                 {/* Progress */}
