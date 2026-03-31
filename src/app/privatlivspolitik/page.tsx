@@ -31,7 +31,7 @@ function Footer() {
             <h4 className="text-xs font-bold text-slate-900 uppercase tracking-[0.2em]">Kontakt</h4>
             <ul className="text-sm text-slate-500 space-y-2 italic font-medium">
               <li><a href="mailto:kontakt@getmait.dk" className="hover:text-mait transition">kontakt@getmait.dk</a></li>
-              <li><a href="tel:+4512345678" className="hover:text-mait transition">+45 12 34 56 78</a></li>
+              <li><a href="tel:+4529939973" className="hover:text-mait transition">+45 29 93 99 73</a></li>
               <li>Support: 24/7 (AI-overvåget)</li>
             </ul>
           </div>
