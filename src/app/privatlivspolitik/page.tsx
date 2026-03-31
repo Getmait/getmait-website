@@ -21,16 +21,15 @@ function Footer() {
           <div className="space-y-4">
             <h4 className="text-xs font-bold text-slate-900 uppercase tracking-[0.2em]">Firmaoplysninger</h4>
             <ul className="text-sm text-slate-500 space-y-2 italic font-medium">
-              <li>GetMait ApS</li>
-              <li>CVR: 12345678</li>
-              <li>Tarphagevej 34</li>
+              <li>Getmait</li>
+              <li>Stormgade 200</li>
               <li>6700 Esbjerg</li>
             </ul>
           </div>
           <div className="space-y-4">
             <h4 className="text-xs font-bold text-slate-900 uppercase tracking-[0.2em]">Kontakt</h4>
             <ul className="text-sm text-slate-500 space-y-2 italic font-medium">
-              <li><a href="mailto:kontakt@getmait.dk" className="hover:text-mait transition">kontakt@getmait.dk</a></li>
+              <li><a href="mailto:sale@getmait.dk" className="hover:text-mait transition">sale@getmait.dk</a></li>
               <li><a href="tel:+4529939973" className="hover:text-mait transition">+45 29 93 99 73</a></li>
               <li>Support: 24/7 (AI-overvåget)</li>
             </ul>
@@ -45,7 +44,7 @@ function Footer() {
           </div>
         </div>
         <div className="pt-8 border-t border-slate-50 text-center text-[10px] text-slate-400 font-mono uppercase tracking-widest">
-          <p>© 2026 GetMait ApS — CVR 12345678 — Alle rettigheder forbeholdes</p>
+          <p>© 2026 Getmait —  — Alle rettigheder forbeholdes</p>
         </div>
       </div>
     </footer>
@@ -73,7 +72,7 @@ export default function Page() {
             Lovpligtig information
           </div>
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-slate-900 mb-4">Privatlivspolitik</h1>
-          <p className="text-slate-400 text-base font-medium">Gældende fra 1. januar 2026 · GetMait ApS · CVR 12345678</p>
+          <p className="text-slate-400 text-base font-medium">Gældende fra 1. januar 2026 · Getmait · </p>
         </div>
       </div>
 
@@ -88,9 +87,9 @@ export default function Page() {
                 <h2 className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-4">1. Dataansvarlig</h2>
                 <p className="text-[15px] text-slate-600 leading-relaxed mb-3">Den dataansvarlige for behandling af personoplysninger er:</p>
                 <div className="text-[14px] text-slate-600 space-y-1 pl-4 border-l-2 border-slate-100">
-                  <p className="font-semibold text-slate-800">GetMait ApS</p>
-                  <p>Tarphagevej 34, 6700 Esbjerg · CVR 12345678</p>
-                  <p><a href="mailto:kontakt@getmait.dk" className="text-mait font-semibold hover:underline">kontakt@getmait.dk</a></p>
+                  <p className="font-semibold text-slate-800">Getmait</p>
+                  <p>Stormgade 200, 6700 Esbjerg · </p>
+                  <p><a href="mailto:sale@getmait.dk" className="text-mait font-semibold hover:underline">sale@getmait.dk</a></p>
                 </div>
               </section>
 
@@ -236,7 +235,7 @@ export default function Page() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-[15px] text-slate-600 leading-relaxed">Kontakt os på <a href="mailto:kontakt@getmait.dk" className="text-mait font-semibold hover:underline">kontakt@getmait.dk</a> for at udøve dine rettigheder. Vi svarer inden for 30 dage.</p>
+                <p className="text-[15px] text-slate-600 leading-relaxed">Kontakt os på <a href="mailto:sale@getmait.dk" className="text-mait font-semibold hover:underline">sale@getmait.dk</a> for at udøve dine rettigheder. Vi svarer inden for 30 dage.</p>
               </section>
 
               <div className="border-t border-slate-100 mb-10" />
